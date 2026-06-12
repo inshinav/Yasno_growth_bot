@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#F4F8FF" />
+  <title>Ясно • AI-Академия</title>
+  <link rel="icon" type="image/png" href="assets/bot-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/views.css" />
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+  <!-- Живой фон: тонкие созвездия на canvas -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <!-- Splash -->
+  <div id="splash" class="splash">
+    <div class="splash__hero" id="splash-hero"></div>
+    <div class="splash__top">
+      <div class="splash__logo" id="splash-logo"></div>
+      <h1 class="splash__title">Ясно<span class="splash__dot">•</span>AI&#8209;Академия</h1>
+      <p class="splash__sub">Проясняем, как AI снимает рутину — бережно и по делу</p>
+      <button class="btn btn--primary splash__cta" id="splash-cta">
+        <span>Начать</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    <div class="splash__loader" id="splash-loader">
+      <div class="sunny-loader"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+
+  <!-- Приложение -->
+  <main id="app" class="app" hidden></main>
+
+  <!-- Таб-бар -->
+  <nav id="tabbar" class="tabbar" hidden aria-label="Разделы"></nav>
+
+  <!-- Тосты и конфетти -->
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+  <canvas id="fx-canvas" aria-hidden="true"></canvas>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

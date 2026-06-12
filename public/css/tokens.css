@@ -1,0 +1,85 @@
+/* ── Ясно • AI-Академия: дизайн-токены ─────────────────────────────── */
+:root {
+  /* Бренд */
+  --azure: #2D8CFF;
+  --azure-deep: #1565E0;
+  --azure-ink: #0E4DAD;
+  --azure-soft: #E3EEFF;
+  --azure-ghost: rgba(45, 140, 255, 0.08);
+  --sun: #FFC83D;
+  --sun-deep: #F5A623;
+  --sun-soft: #FFF3D6;
+
+  /* Поверхности */
+  --paper: #F4F8FF;
+  --card: #FFFFFF;
+  --glass: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.55);
+  --ink: #16181D;
+  --ink-70: rgba(22, 24, 29, 0.7);
+  --ink-50: rgba(22, 24, 29, 0.5);
+  --ink-30: rgba(22, 24, 29, 0.3);
+  --line: rgba(45, 140, 255, 0.14);
+
+  /* Статусы */
+  --ok: #2FB571;
+  --ok-soft: #E2F6EC;
+  --warn: #F5A623;
+  --danger: #E5484D;
+
+  /* Тени (цветные, мягкие) */
+  --shadow-card: 0 2px 8px rgba(21, 101, 224, 0.06), 0 12px 32px rgba(21, 101, 224, 0.10);
+  --shadow-azure: 0 8px 24px rgba(45, 140, 255, 0.35);
+  --shadow-sun: 0 8px 24px rgba(245, 166, 35, 0.35);
+  --shadow-pop: 0 16px 48px rgba(14, 77, 173, 0.22);
+
+  /* Геометрия */
+  --r-xl: 28px;
+  --r-lg: 20px;
+  --r-md: 16px;
+  --r-sm: 10px;
+
+  /* Движение */
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --t-fast: 0.18s;
+  --t-med: 0.32s;
+  --t-slow: 0.55s;
+
+  /* Шрифт */
+  --font: 'Manrope', -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* Safe-зоны Telegram */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --tg-content-top: 0px;
+  --tabbar-h: 64px;
+
+  /* Градиенты */
+  --grad-sky: linear-gradient(180deg, #EAF3FF 0%, #F4F8FF 60%, #FDFEFF 100%);
+  --grad-azure: linear-gradient(135deg, #4DA3FF 0%, #2D8CFF 55%, #1565E0 100%);
+  --grad-sun: linear-gradient(135deg, #FFD970 0%, #FFC83D 55%, #F5A623 100%);
+  --grad-hero: linear-gradient(135deg, #2D8CFF 0%, #6FB4FF 45%, #FFC83D 130%);
+}
+
+/* ── Ночная тема (из Telegram themeParams) ─────────────────────────── */
+html.dark {
+  --paper: #0D1320;
+  --card: #161E30;
+  --glass: rgba(22, 30, 48, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --ink: #F2F6FF;
+  --ink-70: rgba(242, 246, 255, 0.72);
+  --ink-50: rgba(242, 246, 255, 0.5);
+  --ink-30: rgba(242, 246, 255, 0.3);
+  --line: rgba(109, 169, 255, 0.16);
+  --azure-soft: #1B2A47;
+  --azure-ghost: rgba(45, 140, 255, 0.14);
+  --sun-soft: #2E2616;
+  --ok-soft: #11301F;
+
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.3), 0 12px 32px rgba(0, 0, 0, 0.35);
+  --shadow-pop: 0 16px 48px rgba(0, 0, 0, 0.5);
+
+  --grad-sky: linear-gradient(180deg, #0E1626 0%, #0D1320 70%);
+}

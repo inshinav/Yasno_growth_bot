@@ -34,6 +34,7 @@ function profilePayload(user) {
     stats,
     roles: ROLES,
     levels: LEVELS,
+    badgesCatalog: BADGES,
   };
 }
 
