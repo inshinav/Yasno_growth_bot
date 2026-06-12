@@ -13,7 +13,7 @@
 
 ## Этапы
 - [x] **0 — Каркас**: структура, package.json, .gitignore, .env.example, schema.sql, db.js, скелет server/index.js, README, git init. ✅
-- [ ] **1 — Бэкенд-API**: онбординг, уроки, задача→LLM, радар, прогресс, эффект, initData-валидация, LLM-прокси с фолбэком, webhook, шедулер пушей.
+- [x] **1 — Бэкенд-API** ✅ — все эндпоинты прошли смоук (health/auth/onboarding/lessons/task+fallback/radar/progress/effect/feedback/webhook). Фолбэк LLM работает без ключа, webhook не падает без BOT_TOKEN.
 - [ ] **2 — Фронт-каркас + дизайн-система**
 - [ ] **3 — Онбординг + «Принеси задачу» end-to-end**
 - [ ] **4 — Уроки + Радар + реальный контент (9 ролей × 3 уровня × ≥3 урока)**
@@ -22,7 +22,7 @@
 - [ ] **7 — ФИНАЛ: DONE + РУЧНЫЕ ШАГИ**
 
 ## Дальше
-Этап 1: server/routes/api.js, server/routes/telegram.js, server/services/{initdata,llm,gamification,scheduler}.js.
+Этап 2: public/index.html, css (tokens/base/components), js (api.js, app.js, router табов, splash, тема), canvas-созвездия. Затем Этап 3 (онбординг + задача), Этап 4 — контент через Workflow-агентов (схема урока = server/content/lessons/general.json).
 
 ## Заметки
 - Роли: crm, performance, smm, pr, design, product, analytics, growth, general.
