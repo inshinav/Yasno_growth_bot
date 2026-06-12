@@ -4,9 +4,12 @@
 (тот же, что вписан в `/var/www/yasno-growth-bot/.env`).
 
 ## Установить webhook (после HTTPS!)
+`<SECRET>` — та же случайная строка, что в `TG_WEBHOOK_SECRET` в `.env`
+(сгенерировать: `openssl rand -hex 16`). Если в `.env` секрет пуст — убери строку с `secret_token`.
 ```bash
 curl -s "https://api.telegram.org/bot<BOT_TOKEN>/setWebhook" \
   -d "url=https://inshinlab.com/Yasno-growth-bot/api/telegram" \
+  -d "secret_token=<SECRET>" \
   -d "allowed_updates=[\"message\",\"callback_query\"]" \
   -d "drop_pending_updates=true"
 ```

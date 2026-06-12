@@ -9,6 +9,7 @@
     "start": "node server/index.js",
     "dev": "node --watch server/index.js",
     "check": "node scripts/check.mjs",
+    "lint": "node scripts/lint.mjs",
     "screenshots": "node scripts/screenshots.mjs"
   },
   "engines": {

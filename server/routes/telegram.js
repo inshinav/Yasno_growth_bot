@@ -69,6 +69,11 @@ async function handleCallback(cb) {
 
 /** Webhook. Всегда отвечаем 200 — Telegram не должен ретраить из-за наших ошибок. */
 telegramRouter.post('/', async (req, res) => {
+  // Защита: если задан TG_WEBHOOK_SECRET, принимаем только запросы Telegram
+  const secret = process.env.TG_WEBHOOK_SECRET;
+  if (secret && req.get('X-Telegram-Bot-Api-Secret-Token') !== secret) {
+    return res.status(401).json({ ok: false });
+  }
   res.json({ ok: true });
   try {
     const upd = req.body || {};
