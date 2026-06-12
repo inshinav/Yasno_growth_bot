@@ -34,6 +34,18 @@
     var(--paper) 100%);
 }
 html.dark .splash__hero { opacity: 0.5; }
+.splash__hero--code { background-image: none; }
+.splash__hero--code svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: hero-drift 9s ease-in-out infinite alternate;
+}
+@keyframes hero-drift {
+  from { transform: translateY(0); }
+  to { transform: translateY(-14px); }
+}
 html.dark .splash__hero::after {
   background: linear-gradient(180deg,
     var(--paper) 0%,

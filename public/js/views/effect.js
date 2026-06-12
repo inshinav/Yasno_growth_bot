@@ -28,7 +28,7 @@ export async function renderEffect(view) {
   $('#eff-body', view).innerHTML = `
     <div class="card effect-hero">
       <p class="sub" style="margin-bottom:2px">КОМАНДА ВЫСВОБОДИЛА</p>
-      <div class="giant" data-count="${hours}">0<span class="unit"> ч/нед</span></div>
+      <div class="giant" data-count="${hours}">0<span class="unit">&#8201;ч/нед</span></div>
       <p class="sub">подтверждено людьми · ещё ≈${estHours} ч/нед в работе</p>
       <div class="stat-grid" style="margin:18px 0 0">
         <div class="stat-cell"><div class="num">${effect.tasksAutomated}</div><div class="lbl">${plural(effect.tasksAutomated, 'задача', 'задачи', 'задач')} автоматизировано</div></div>
@@ -82,7 +82,7 @@ export async function renderEffect(view) {
     (function tick(t) {
       const k = Math.min(1, (t - t0) / dur);
       const eased = 1 - Math.pow(1 - k, 3);
-      giant.innerHTML = `${Math.round(target * eased * 10) / 10}<span class="unit"> ч/нед</span>`;
+      giant.innerHTML = `${Math.round(target * eased * 10) / 10}<span class="unit">&#8201;ч/нед</span>`;
       if (k < 1) requestAnimationFrame(tick);
     })(t0);
   }

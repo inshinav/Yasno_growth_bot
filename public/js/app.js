@@ -29,10 +29,44 @@ function setupSplashArt() {
   img.onload = () => { logo.innerHTML = ''; logo.appendChild(img); };
   img.onerror = () => { logo.style.color = '#fff'; logo.innerHTML = misc.logo; };
 
-  // Герой: если файла нет, остаётся брендовый градиент
+  // Герой: если файла нет — рисуем небо кодом (SVG-облака + солнце)
   const probe = new Image();
   probe.src = 'assets/splash-hero.png';
-  probe.onerror = () => { $('#splash-hero').style.display = 'none'; };
+  probe.onerror = () => {
+    const hero = $('#splash-hero');
+    hero.classList.add('splash__hero--code');
+    hero.innerHTML = `
+      <svg viewBox="0 0 390 844" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <radialGradient id="sun-g" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#FFD970" stop-opacity=".95"/>
+            <stop offset="45%" stop-color="#FFC83D" stop-opacity=".5"/>
+            <stop offset="100%" stop-color="#FFC83D" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="soft" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="16"/></filter>
+          <filter id="soft2" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="26"/></filter>
+        </defs>
+        <circle cx="285" cy="430" r="150" fill="url(#sun-g)"/>
+        <circle cx="285" cy="430" r="52" fill="#FFD970" opacity=".9" filter="url(#soft)"/>
+        <g fill="#FFFFFF">
+          <ellipse cx="80" cy="585" rx="120" ry="46" opacity=".85" filter="url(#soft2)"/>
+          <ellipse cx="210" cy="640" rx="150" ry="52" opacity=".95" filter="url(#soft2)"/>
+          <ellipse cx="350" cy="595" rx="110" ry="42" opacity=".8" filter="url(#soft2)"/>
+          <ellipse cx="60" cy="745" rx="150" ry="60" filter="url(#soft2)"/>
+          <ellipse cx="300" cy="775" rx="170" ry="66" filter="url(#soft2)"/>
+        </g>
+        <g fill="#6FB4FF">
+          <circle cx="60" cy="380" r="3" opacity=".55"/>
+          <circle cx="130" cy="330" r="2" opacity=".4"/>
+          <circle cx="330" cy="300" r="2.5" opacity=".5"/>
+          <circle cx="40" cy="480" r="2" opacity=".35"/>
+        </g>
+        <g fill="#FFC83D">
+          <path d="M195 300l4 11 11 4-11 4-4 11-4-11-11-4 11-4z" opacity=".8"/>
+          <path d="M90 250l2.6 7 7 2.6-7 2.6-2.6 7-2.6-7-7-2.6 7-2.6z" opacity=".6"/>
+        </g>
+      </svg>`;
+  };
 }
 
 function buildTabbar() {

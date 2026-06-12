@@ -55,7 +55,9 @@ export function authMiddleware(getOrCreateUser) {
     if (String(process.env.ALLOW_DEV_NO_AUTH) === 'true') {
       // Локальная разработка без Telegram
       const devId = req.get('X-Dev-User') || 'dev-1';
-      req.user = getOrCreateUser({ id: devId, first_name: 'Dev', username: 'dev' });
+      let devName = '';
+      try { devName = decodeURIComponent(req.get('X-Dev-Name') || ''); } catch { /* ignore */ }
+      req.user = getOrCreateUser({ id: devId, first_name: devName, username: 'dev' });
       return next();
     }
 

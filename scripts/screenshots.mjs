@@ -16,10 +16,12 @@ const OUT = resolve(ROOT, 'shots');
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-async function apiCall(user, method, path, body) {
+async function apiCall(user, method, path, body, name) {
+  const headers = { 'Content-Type': 'application/json', 'X-Dev-User': user };
+  if (name) headers['X-Dev-Name'] = encodeURIComponent(name);
   const res = await fetch(API + path, {
     method,
-    headers: { 'Content-Type': 'application/json', 'X-Dev-User': user },
+    headers,
     body: body !== undefined ? JSON.stringify(body) : undefined,
   });
   return res.json().catch(() => ({}));
@@ -27,7 +29,7 @@ async function apiCall(user, method, path, body) {
 
 /* Сидируем данные: главный юзер + соседи для лидерборда */
 async function seed() {
-  await apiCall('shot-main', 'POST', 'auth', {});
+  await apiCall('shot-main', 'POST', 'auth', {}, 'Саша');
   await apiCall('shot-main', 'POST', 'onboarding', { role: 'smm', level: 'practitioner' });
   const { lessons } = await apiCall('shot-main', 'GET', 'lessons');
   for (const l of (lessons || []).slice(0, 3)) {
@@ -43,8 +45,8 @@ async function seed() {
     ['shot-igor', 'Игорь', 'analytics', 'practitioner', 60],
     ['shot-mila', 'Мила', 'crm', 'beginner', 45],
   ];
-  for (const [id, , role, level, saved] of mates) {
-    await apiCall(id, 'POST', 'auth', {});
+  for (const [id, name, role, level, saved] of mates) {
+    await apiCall(id, 'POST', 'auth', {}, name);
     await apiCall(id, 'POST', 'onboarding', { role, level });
     const ls = await apiCall(id, 'GET', 'lessons');
     for (const l of (ls.lessons || []).slice(0, 2)) {

@@ -53,8 +53,10 @@ export async function renderProgress(view) {
         <div class="spacer"></div>
         <span class="small" style="font-weight:800;color:var(--azure)">${donePct}%</span>
       </div>
-      <div class="progressbar"><div class="progressbar__fill" style="width:${donePct}%"></div></div>
-      <p class="small muted" style="margin-top:9px">${stats.lessonsDone} из ${trackTotal} ${plural(trackTotal, 'урока', 'уроков', 'уроков')} базового трека · место в команде: ${rank || '—'} из ${totalUsers}</p>
+      ${trackTotal
+        ? `<div class="progressbar"><div class="progressbar__fill" style="width:${donePct}%"></div></div>
+           <p class="small muted" style="margin-top:9px">${stats.lessonsDone} из ${trackTotal} ${plural(trackTotal, 'урока', 'уроков', 'уроков')} базового трека · место в команде: ${rank || '—'} из ${totalUsers}</p>`
+        : `<p class="small muted">Базовый трек для твоей роли вот-вот наполнится. Пока — генерируй уроки под себя во вкладке «Учусь» ✨</p>`}
     </div>
 
     <h3 style="margin:0 2px 12px">Бейджи · ${badges.filter((b) => b.earned).length} из ${badges.length}</h3>
