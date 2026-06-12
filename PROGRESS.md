@@ -22,7 +22,8 @@
 - [ ] **7 — ФИНАЛ: DONE + РУЧНЫЕ ШАГИ**
 
 ## Дальше
-Этап 2: public/index.html, css (tokens/base/components), js (api.js, app.js, router табов, splash, тема), canvas-созвездия. Затем Этап 3 (онбординг + задача), Этап 4 — контент через Workflow-агентов (схема урока = server/content/lessons/general.json).
+Этап 4 в процессе: Workflow wf_38eebf68-614 (10 контент-агентов + 3 ревьюера). Готово и провалидировано: crm, design, growth, performance, pr, product, smm, general, radar. Ждём: analytics + фаза «Ревью» (3 линзы). После: применить правки ревьюеров → закоммитить контент → перегнать скриншоты (цикл №2: проверить SVG-небо splash, ридер урока, радар с контентом) → циклы 3+ → Этап 6 финальная проверка → Этап 7 DONE.
+Деплой-конфиги (Этап 6) уже написаны: deploy/{nginx-site.conf, ecosystem.config.cjs, setup.sh, webhook.md, README.md}. Playwright установлен, scripts/screenshots.mjs работает (15 скринов, цикл №1 пройден: SVG-небо splash, имена dev-юзеров, guard трека, типографика).
 
 ## Заметки
 - Роли: crm, performance, smm, pr, design, product, analytics, growth, general.
