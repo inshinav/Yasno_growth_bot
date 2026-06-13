@@ -46,24 +46,32 @@ function setupSplashArt() {
           <filter id="soft" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="16"/></filter>
           <filter id="soft2" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="26"/></filter>
         </defs>
-        <circle cx="285" cy="430" r="150" fill="url(#sun-g)"/>
-        <circle cx="285" cy="430" r="52" fill="#FFD970" opacity=".9" filter="url(#soft)"/>
-        <g fill="#FFFFFF">
-          <ellipse cx="80" cy="585" rx="120" ry="46" opacity=".85" filter="url(#soft2)"/>
-          <ellipse cx="210" cy="640" rx="150" ry="52" opacity=".95" filter="url(#soft2)"/>
-          <ellipse cx="350" cy="595" rx="110" ry="42" opacity=".8" filter="url(#soft2)"/>
-          <ellipse cx="60" cy="745" rx="150" ry="60" filter="url(#soft2)"/>
-          <ellipse cx="300" cy="775" rx="170" ry="66" filter="url(#soft2)"/>
+        <linearGradient id="cloud-g" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#FFFFFF"/>
+          <stop offset="100%" stop-color="#DCEBFF"/>
+        </linearGradient>
+        <circle cx="225" cy="470" r="170" fill="url(#sun-g)"/>
+        <circle cx="225" cy="470" r="58" fill="#FFE07A" opacity=".95" filter="url(#soft)"/>
+        <g fill="url(#cloud-g)">
+          <ellipse cx="70" cy="600" rx="125" ry="48" opacity=".9" filter="url(#soft2)"/>
+          <ellipse cx="220" cy="660" rx="158" ry="56" filter="url(#soft2)"/>
+          <ellipse cx="355" cy="610" rx="115" ry="44" opacity=".85" filter="url(#soft2)"/>
+          <ellipse cx="45" cy="760" rx="160" ry="64" filter="url(#soft2)"/>
+          <ellipse cx="310" cy="790" rx="180" ry="70" filter="url(#soft2)"/>
         </g>
         <g fill="#6FB4FF">
-          <circle cx="60" cy="380" r="3" opacity=".55"/>
-          <circle cx="130" cy="330" r="2" opacity=".4"/>
-          <circle cx="330" cy="300" r="2.5" opacity=".5"/>
-          <circle cx="40" cy="480" r="2" opacity=".35"/>
+          <circle cx="55" cy="360" r="3" opacity=".55"/>
+          <circle cx="125" cy="320" r="2" opacity=".4"/>
+          <circle cx="320" cy="290" r="2.5" opacity=".5"/>
+          <circle cx="355" cy="400" r="2" opacity=".4"/>
+          <circle cx="40" cy="470" r="2" opacity=".35"/>
+          <circle cx="285" cy="350" r="1.6" opacity=".45"/>
+          <circle cx="170" cy="270" r="1.6" opacity=".35"/>
         </g>
         <g fill="#FFC83D">
-          <path d="M195 300l4 11 11 4-11 4-4 11-4-11-11-4 11-4z" opacity=".8"/>
-          <path d="M90 250l2.6 7 7 2.6-7 2.6-2.6 7-2.6-7-7-2.6 7-2.6z" opacity=".6"/>
+          <path d="M330 330l4.5 12 12 4.5-12 4.5-4.5 12-4.5-12-12-4.5 12-4.5z" opacity=".85"/>
+          <path d="M95 250l2.8 7.6 7.6 2.8-7.6 2.8-2.8 7.6-2.8-7.6-7.6-2.8 7.6-2.8z" opacity=".6"/>
+          <path d="M250 250l2.2 6 6 2.2-6 2.2-2.2 6-2.2-6-6-2.2 6-2.2z" opacity=".5"/>
         </g>
       </svg>`;
   };
