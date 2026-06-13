@@ -36,8 +36,9 @@ nginx -t
 systemctl reload nginx
 
 echo "── 5/6 PM2 + автозапуск ──"
-npm install -g pm2
-pm2 start deploy/ecosystem.config.cjs
+command -v pm2 >/dev/null || npm install -g pm2
+# идемпотентно: если процесс уже есть — перезапускаем, иначе создаём
+pm2 reload deploy/ecosystem.config.cjs --update-env || pm2 start deploy/ecosystem.config.cjs
 pm2 save
 pm2 startup systemd -u root --hp /root | tail -1 | bash || true
 
