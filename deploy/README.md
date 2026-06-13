@@ -32,12 +32,23 @@ pm2 status                                                      # online
 pm2 logs yasno-growth-bot --lines 30                            # без ошибок
 ```
 
-## Обновление версии
+## Обновление версии (через GitHub — рекомендуется)
+Код на GitHub: https://github.com/inshinav/Yasno_growth_bot (публичный, токен не нужен).
+
+Первичная привязка существующей папки к репозиторию (один раз):
 ```bash
 cd /var/www/yasno-growth-bot
-git pull               # или загрузить файлы через File Manager
+git init -q
+git remote add origin https://github.com/inshinav/Yasno_growth_bot.git
+git fetch origin main
+git checkout -f -B main origin/main   # .env, data/, node_modules сохраняются (они вне git)
 npm ci --omit=dev
-pm2 restart yasno-growth-bot
+pm2 restart yasno-growth-bot --update-env
+```
+
+Дальше каждое обновление — одна команда:
+```bash
+cd /var/www/yasno-growth-bot && bash deploy/pull.sh
 ```
 
 ## Файлы
