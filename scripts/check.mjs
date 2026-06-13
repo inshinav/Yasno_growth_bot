@@ -89,7 +89,9 @@ function checkRadar() {
     if (!it.forRoles?.default) err(tag, 'нет forRoles.default');
     const roleKeys = Object.keys(it.forRoles || {}).filter((k) => k !== 'default');
     if (roleKeys.some((k) => !ROLES.includes(k))) err(tag, `неизвестные роли: ${roleKeys}`);
-    if (roleKeys.length < 2) err(tag, 'мало ролевых разборов (нужно ≥2 + default)');
+    // released — минимум 1 ролевой разбор + default; upcoming достаточно default
+    const minRoles = it.status === 'upcoming' ? 0 : 1;
+    if (roleKeys.length < minRoles) err(tag, `мало ролевых разборов (нужно ≥${minRoles} + default)`);
   });
 }
 
