@@ -5,15 +5,32 @@ import { checkBadges } from '../services/gamification.js';
 
 export const telegramRouter = Router();
 
-const APP_URL = () => process.env.PUBLIC_URL || 'https://inshinlab.com/Yasno-growth-bot/';
+const APP_URL = () => (process.env.PUBLIC_URL || 'https://inshinlab.com/Yasno-growth-bot/').replace(/\/?$/, '/');
 
 const WELCOME = (name) =>
-  `Привет${name ? ', ' + name : ''}! Это <b>Ясно • AI-Академия</b> 🌤\n\n` +
-  `Я помогаю учиться применять AI в работе:\n` +
-  `• <b>Принеси задачу</b> — опиши рутину, соберу готовый AI-воркфлоу\n` +
-  `• <b>Микро-уроки</b> — 3–5 минут под твою роль и уровень\n` +
-  `• <b>Радар</b> — свежие AI-инструменты с разбором «как применить»\n\n` +
-  `Жми кнопку — и поехали ✨`;
+  `Привет${name ? ', ' + name : ''}! 🌤\n` +
+  `Я <b>Ясно • AI-Академия</b> — твой AI-наставник.\n\n` +
+  `⚡ <b>Задача</b> — опиши рутину, соберу готовый AI-воркфлоу с промтом\n` +
+  `🎓 <b>Уроки</b> — 3–5 минут под твою роль и уровень\n` +
+  `📡 <b>Радар</b> — свежие AI-инструменты с разбором\n\n` +
+  `Выбери, с чего начать 👇`;
+
+/** Клавиатура запуска: главная кнопка + быстрые ярлыки с deep-link в раздел. */
+const launchKeyboard = () => {
+  const u = APP_URL();
+  return {
+    reply_markup: {
+      inline_keyboard: [
+        [{ text: '🌤 Открыть AI-Академию', web_app: { url: u } }],
+        [
+          { text: '⚡ Задача', web_app: { url: u + '#task' } },
+          { text: '📡 Радар', web_app: { url: u + '#radar' } },
+          { text: '🎓 Уроки', web_app: { url: u + '#learn' } },
+        ],
+      ],
+    },
+  };
+};
 
 async function handleMessage(msg) {
   const chatId = msg.chat?.id;
@@ -21,9 +38,7 @@ async function handleMessage(msg) {
   const user = getOrCreateUser(msg.from || { id: chatId });
   const text = String(msg.text || '');
 
-  const kb = {
-    reply_markup: { inline_keyboard: [[{ text: '🌤 Открыть AI-Академию', web_app: { url: APP_URL() } }]] },
-  };
+  const kb = launchKeyboard();
 
   if (text.startsWith('/start')) {
     logEvent(user.id, 'bot_start');

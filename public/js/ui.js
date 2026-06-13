@@ -1,6 +1,6 @@
 /* UI-хелперы: рендер, тосты, нижние листы, конфетти, копирование, mini-markdown. */
-import { haptic } from './tg.js?v=v4';
-import { badgeIcons, misc } from './icons.js?v=v4';
+import { haptic } from './tg.js?v=v5';
+import { badgeIcons, misc } from './icons.js?v=v5';
 
 export const $ = (sel, root = document) => root.querySelector(sel);
 export const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];

@@ -1,16 +1,16 @@
 /* Бут: splash → auth → онбординг или приложение. Роутер табов. */
-import { initTelegram, haptic } from './tg.js?v=v4';
-import { api } from './api.js?v=v4';
-import { state, setProfile } from './state.js?v=v4';
-import { $, el, toast } from './ui.js?v=v4';
-import { tabIcons, misc } from './icons.js?v=v4';
-import { startBackground } from './bg.js?v=v4';
-import { renderOnboarding } from './views/onboarding.js?v=v4';
-import { renderLearn } from './views/learn.js?v=v4';
-import { renderTask } from './views/task.js?v=v4';
-import { renderRadar } from './views/radar.js?v=v4';
-import { renderProgress } from './views/progress.js?v=v4';
-import { renderEffect } from './views/effect.js?v=v4';
+import { initTelegram, haptic } from './tg.js?v=v5';
+import { api } from './api.js?v=v5';
+import { state, setProfile } from './state.js?v=v5';
+import { $, el, toast } from './ui.js?v=v5';
+import { tabIcons, misc } from './icons.js?v=v5';
+import { startBackground } from './bg.js?v=v5';
+import { renderOnboarding } from './views/onboarding.js?v=v5';
+import { renderLearn } from './views/learn.js?v=v5';
+import { renderTask } from './views/task.js?v=v5';
+import { renderRadar } from './views/radar.js?v=v5';
+import { renderProgress } from './views/progress.js?v=v5';
+import { renderEffect } from './views/effect.js?v=v5';
 
 const TABS = [
   { id: 'learn', label: 'Учусь', render: renderLearn },
@@ -112,12 +112,17 @@ export function switchTab(id, force = false) {
   scrollTo({ top: 0 });
 }
 
-export function showApp() {
-  $('#splash').classList.add('splash--out');
-  setTimeout(() => $('#splash').remove(), 600);
+function hashTab() {
+  const h = (location.hash || '').replace('#', '');
+  return TABS.some((t) => t.id === h) ? h : null;
+}
+
+export function showApp(tab) {
+  $('#splash')?.classList.add('splash--out');
+  setTimeout(() => $('#splash')?.remove(), 600);
   $('#app').hidden = false;
   $('#tabbar').hidden = false;
-  switchTab('learn', true);
+  switchTab(TABS.some((t) => t.id === tab) ? tab : 'learn', true);
 }
 
 export function startOnboarding() {
@@ -160,11 +165,14 @@ async function boot() {
 
   loader.hidden = true;
   cta.style.visibility = 'visible';
+  const deepTab = hashTab();
   cta.onclick = () => {
     haptic('medium');
-    if (profile.user.onboarded) showApp();
+    if (profile.user.onboarded) showApp(deepTab);
     else startOnboarding();
   };
+  // Deep-link с кнопки-ярлыка (#task/#radar/#learn): сразу открываем нужный раздел
+  if (deepTab && profile.user.onboarded) showApp(deepTab);
 }
 
 boot();

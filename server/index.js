@@ -53,3 +53,7 @@ app.listen(PORT, () => {
 
 const { startScheduler } = await import('./services/scheduler.js');
 startScheduler();
+
+// Настроить «лицо» бота в Telegram (описание, команды, меню) — один раз на старте
+const { setupBotPresence } = await import('./services/botSetup.js');
+setupBotPresence();

@@ -1,9 +1,9 @@
 /* «Радар новинок»: свежие AI-инструменты + «как применить в твоей роли»,
    раздел «на подходе» и матрица «какая модель под задачу». */
-import { api } from '../api.js?v=v4';
-import { $, esc, skeletonList } from '../ui.js?v=v4';
-import { misc } from '../icons.js?v=v4';
-import { openLink, haptic } from '../tg.js?v=v4';
+import { api } from '../api.js?v=v5';
+import { $, esc, skeletonList } from '../ui.js?v=v5';
+import { misc } from '../icons.js?v=v5';
+import { openLink, haptic } from '../tg.js?v=v5';
 
 const CATEGORY = {
   llm: { label: 'Модели', emoji: '🧠' },
