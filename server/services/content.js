@@ -37,11 +37,27 @@ function loadLessons() {
   return all;
 }
 
+function readJsonSafe(file, fallback) {
+  try { return JSON.parse(readFileSync(resolve(CONTENT, file), 'utf8')); }
+  catch { return fallback; }
+}
+
 let LESSONS = loadLessons();
-let RADAR = JSON.parse(readFileSync(resolve(CONTENT, 'radar.json'), 'utf8'));
+let RADAR = readJsonSafe('radar.json', []);
+let RADAR_MATRIX = readJsonSafe('radar-matrix.json', []);
+let RADAR_STAMP = readJsonSafe('radar-updated.json', null);
 
 export const lessons = () => LESSONS;
 export const radar = () => RADAR;
+export const radarMatrix = () => RADAR_MATRIX;
+export const radarUpdated = () => RADAR_STAMP;
+
+/** Перечитать радар с диска (после автообновления). */
+export function reloadRadar() {
+  RADAR = readJsonSafe('radar.json', RADAR);
+  RADAR_MATRIX = readJsonSafe('radar-matrix.json', RADAR_MATRIX);
+  RADAR_STAMP = readJsonSafe('radar-updated.json', RADAR_STAMP);
+}
 
 export const lessonsFor = (role, level) =>
   LESSONS.filter((l) => l.role === role && l.level === level);

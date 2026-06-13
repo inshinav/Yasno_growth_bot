@@ -3,7 +3,7 @@ import { db, getOrCreateUser, logEvent } from '../db.js';
 import { authMiddleware } from '../services/initdata.js';
 import { chatJSON } from '../services/llm.js';
 import {
-  ROLES, LEVELS, lessonsFor, getLesson, lessonOfDay, radar,
+  ROLES, LEVELS, lessonsFor, getLesson, lessonOfDay, radar, radarMatrix, radarUpdated,
 } from '../services/content.js';
 import {
   BADGES, touchStreak, userStats, checkBadges, leaderboard, teamEffect, todayUTC,
@@ -167,7 +167,13 @@ apiRouter.get('/radar', wrap((req, res) => {
     apply: it.forRoles?.[role] || it.forRoles?.default || null,
     forRoles: undefined,
   }));
-  res.json({ ok: true, items, role });
+  // released сверху по дате (свежее выше), upcoming в конце
+  items.sort((a, b) => {
+    const su = (x) => (x.status === 'upcoming' ? 1 : 0);
+    if (su(a) !== su(b)) return su(a) - su(b);
+    return String(b.date || '').localeCompare(String(a.date || ''));
+  });
+  res.json({ ok: true, items, role, matrix: radarMatrix(), updated: radarUpdated() });
 }));
 
 /** Личный прогресс. */

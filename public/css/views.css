@@ -487,6 +487,46 @@ html.dark .radar-item__apply b { color: #8FC0FF; }
   margin-bottom: 12px;
   scrollbar-width: none;
 }
+.radar-fresh {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ok);
+  background: var(--ok-soft);
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+.radar-item__best {
+  margin-top: 9px;
+  padding: 11px 14px;
+  border-radius: var(--r-md);
+  background: var(--sun-soft);
+  font-size: 13.5px;
+}
+.radar-item__best b { color: var(--sun-deep); }
+.radar-item--soon { border-style: dashed; opacity: 0.94; }
+.soon-tag {
+  position: absolute;
+  top: 14px; right: 14px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--azure-deep);
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--azure-ghost);
+  border: 1px dashed var(--azure);
+}
+html.dark .soon-tag { color: #8FC0FF; }
+.radar-section { margin: 22px 2px 0; }
+.radar-section h3 { font-size: 17px; }
+.matrix-row { padding: 12px 0; }
+.matrix-row--div { border-top: 1px dashed var(--line); }
+.matrix-row__task { font-weight: 800; font-size: 14.5px; }
+.matrix-row__pick { font-size: 14px; color: var(--ink-70); margin-top: 3px; }
+.matrix-row__budget { font-size: 12.5px; color: var(--ink-50); margin-top: 4px; }
 
 /* ── Прогресс ──────────────────────────────────────────────────────── */
 .me-card { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }

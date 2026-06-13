@@ -1,5 +1,6 @@
 import { db, logEvent } from '../db.js';
 import { sendMessage } from './telegram.js';
+import { refreshRadar, isStale } from './radarRefresh.js';
 
 const EVERY_MS = 10 * 60 * 1000;
 
@@ -37,8 +38,21 @@ async function processFollowups() {
   }
 }
 
+async function maybeRefreshRadar() {
+  if (String(process.env.RADAR_REFRESH || 'on') === 'off') return;
+  const hours = Number(process.env.RADAR_REFRESH_HOURS ?? 24);
+  if (!hours) return; // 0 = только вручную
+  if (!isStale(hours)) return;
+  const r = await refreshRadar();
+  if (r.ok) logEvent(null, 'radar_refreshed', { count: r.count });
+}
+
 export function startScheduler() {
   setInterval(processFollowups, EVERY_MS);
   setTimeout(processFollowups, 15 * 1000); // первый прогон вскоре после старта
-  console.log('[scheduler] follow-up пуши: каждые 10 минут');
+
+  // Радар: проверяем свежесть раз в час, обновляем если устарел
+  setInterval(maybeRefreshRadar, 60 * 60 * 1000);
+  setTimeout(maybeRefreshRadar, 60 * 1000); // первый прогон через минуту после старта
+  console.log('[scheduler] follow-up пуши: каждые 10 минут; радар: проверка свежести ежечасно');
 }
