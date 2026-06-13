@@ -1,10 +1,10 @@
 /* «Учусь»: урок дня, трек уроков, генерация урока под себя, ридер с квизом. */
-import { api } from '../api.js';
-import { state, me, levels } from '../state.js';
-import { $, el, esc, mdLite, toast, sheet, copyText, confetti, skeletonList, plural } from '../ui.js';
-import { notifyBadges } from '../badges.js';
-import { misc } from '../icons.js';
-import { haptic, openLink } from '../tg.js';
+import { api } from '../api.js?v=v2';
+import { state, me, levels } from '../state.js?v=v2';
+import { $, el, esc, mdLite, toast, sheet, copyText, confetti, skeletonList, plural } from '../ui.js?v=v2';
+import { notifyBadges } from '../badges.js?v=v2';
+import { misc } from '../icons.js?v=v2';
+import { haptic, openLink } from '../tg.js?v=v2';
 
 export async function renderLearn(view) {
   const streak = state.profile?.stats?.streak?.current || 0;

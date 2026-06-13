@@ -1,9 +1,9 @@
 /* «Радар новинок»: свежие AI-инструменты + «как применить в твоей роли»,
    раздел «на подходе» и матрица «какая модель под задачу». */
-import { api } from '../api.js';
-import { $, esc, skeletonList } from '../ui.js';
-import { misc } from '../icons.js';
-import { openLink, haptic } from '../tg.js';
+import { api } from '../api.js?v=v2';
+import { $, esc, skeletonList } from '../ui.js?v=v2';
+import { misc } from '../icons.js?v=v2';
+import { openLink, haptic } from '../tg.js?v=v2';
 
 const CATEGORY = {
   llm: { label: 'Модели', emoji: '🧠' },
@@ -97,7 +97,9 @@ const itemHTML = (it) => `
     </div>
     <p class="radar-item__what">${esc(it.what || '')}</p>
     ${it.bestFor ? `<div class="radar-item__best">✦ <b>Лучше всего для:</b> ${esc(it.bestFor)}</div>` : ''}
+    ${it.howTo ? `<div class="radar-item__how">🛠 <b>Как работать:</b> ${esc(it.howTo)}</div>` : ''}
     ${it.apply ? `<div class="radar-item__apply"><b>Для твоей роли:</b> ${esc(it.apply)}</div>` : ''}
+    ${it.ruNote ? `<div class="radar-item__ru">🌐 ${esc(it.ruNote)}</div>` : ''}
     ${it.url ? `
       <button class="btn btn--ghost btn--sm" data-url="${esc(it.url)}" style="margin-top:12px">
         Открыть ${esc(shortHost(it.url))} →

@@ -1,5 +1,5 @@
 /* API-клиент. Все пути относительные — приложение живёт в подпапке. */
-import { initData } from './tg.js';
+import { initData } from './tg.js?v=v2';
 
 const baseDir = location.pathname.endsWith('/')
   ? location.pathname

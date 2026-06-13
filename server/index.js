@@ -15,10 +15,19 @@ app.use(express.json({ limit: '256kb' }));
 
 const router = express.Router();
 
-// Статика мини-аппа
+// Статика мини-аппа.
+// Код (html/js/css) — no-store: Telegram WebView агрессивно кэширует, из-за этого
+// правки не подхватывались. Картинки/шрифты можно кэшировать надолго.
 router.use(express.static(resolve(__dirname, '../public'), {
   index: 'index.html',
-  maxAge: process.env.NODE_ENV === 'production' ? '1h' : 0,
+  etag: true,
+  setHeaders: (res, filePath) => {
+    if (/\.(?:html|js|css)$/i.test(filePath)) {
+      res.setHeader('Cache-Control', 'no-store, must-revalidate');
+    } else if (/\.(?:png|jpe?g|webp|svg|ico|woff2?)$/i.test(filePath)) {
+      res.setHeader('Cache-Control', 'public, max-age=86400');
+    }
+  },
 }));
 
 // API (подключается в routes/)
