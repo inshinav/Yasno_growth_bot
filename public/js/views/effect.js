@@ -1,7 +1,7 @@
 /* «Эффект»: командная копилка времени, топ-роли, лидерборд. Аргумент для СМО. */
-import { api } from '../api.js?v=v2';
-import { $, esc, skeletonList, plural } from '../ui.js?v=v2';
-import { misc, roleColor } from '../icons.js?v=v2';
+import { api } from '../api.js?v=v3';
+import { $, esc, skeletonList, plural } from '../ui.js?v=v3';
+import { misc, roleColor } from '../icons.js?v=v3';
 
 export async function renderEffect(view) {
   view.innerHTML = `

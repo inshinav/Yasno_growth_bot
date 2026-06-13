@@ -1,9 +1,9 @@
 /* «Прогресс»: маскот, статы, трек, бейджи, смена роли/уровня. */
-import { api } from '../api.js?v=v2';
-import { state, setProfile, me, roles, levels } from '../state.js?v=v2';
-import { $, esc, toast, sheet, skeletonList, fmtMinutes, plural } from '../ui.js?v=v2';
-import { badgeIcons, roleIcons, roleColor, misc } from '../icons.js?v=v2';
-import { haptic } from '../tg.js?v=v2';
+import { api } from '../api.js?v=v3';
+import { state, setProfile, me, roles, levels } from '../state.js?v=v3';
+import { $, esc, toast, sheet, skeletonList, fmtMinutes, plural } from '../ui.js?v=v3';
+import { badgeIcons, roleIcons, roleColor, misc } from '../icons.js?v=v3';
+import { haptic } from '../tg.js?v=v3';
 
 export async function renderProgress(view) {
   view.innerHTML = `

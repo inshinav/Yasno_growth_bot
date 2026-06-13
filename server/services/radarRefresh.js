@@ -39,7 +39,9 @@ function buildPrompt() {
       "vendor": "Компания",
       "category": "llm|agents|video|image|audio|automation|analytics|writing",
       "date": "YYYY-MM реального релиза/анонса",
-      "status": "released" | "upcoming",
+      "status": "released" | "beta" | "upcoming",
+      "eta": "для beta/upcoming — ожидаемый срок ВЫХОДА словами (будущий, напр. «лето 2026»); для released — пусто",
+      "caution": "предупреждение, если есть: блокировка/санкции/депрекейт/регуляторный риск/уход данных; иначе пусто",
       "hot": true|false,
       "what": "что это и что нового, 1-2 предложения, по-русски, бережный тон, без канцелярита",
       "bestFor": "для каких КОНКРЕТНЫХ задач лучше всего подходит",
@@ -55,7 +57,7 @@ function buildPrompt() {
 }
 
 Требования:
-- radar: 18-24 элемента. Бери РЕАЛЬНЫХ лидеров по аренам и бенчмаркам (LMArena, Artificial Analysis, Video/Image Arena, DesignArena), а не случайные модели. Сначала released, отсортированные по date (свежее — выше), затем 5-7 status:"upcoming" (анонсы/превью) — чтобы команда знала заранее. hot:true у 6-8 настоящих топов.
+- radar: 18-24 элемента. Бери РЕАЛЬНЫХ лидеров по аренам и бенчмаркам (LMArena, Artificial Analysis, Video/Image Arena, DesignArena), а не случайные модели. Сначала released, затем beta/upcoming — у них eta (ожидаемый срок) и НЕ прошедшая дата как релиз. hot:true у 6-8 настоящих топов. Если есть блокировка/санкции/депрекейт — заполни caution.
 - Покрой категории: модели (LLM), видео, картинки, звук, агенты, автоматизация. Для видео и картинок ищи именно текущих лидеров.
 - Даты реальные (по найденным источникам). Если не уверен в факте — НЕ включай (никаких выдумок).
 - Категорий минимум 5 разных. Роли в forRoles только из: ${ROLES.join(', ')}. Для каждого элемента 2-4 роли + default.
@@ -136,12 +138,14 @@ function cleanItem(it, i) {
     vendor: String(it.vendor || '').slice(0, 40),
     category: it.category,
     date: it.date,
-    status: it.status === 'upcoming' ? 'upcoming' : 'released',
+    status: ['upcoming', 'beta'].includes(it.status) ? it.status : 'released',
     hot: !!it.hot,
     what: String(it.what).slice(0, 400),
-    bestFor: it.bestFor ? String(it.bestFor).slice(0, 300) : null,
-    howTo: it.howTo ? String(it.howTo).slice(0, 300) : null,
-    ruNote: it.ruNote ? String(it.ruNote).slice(0, 160) : null,
+    bestFor: it.bestFor ? String(it.bestFor).slice(0, 320) : null,
+    howTo: it.howTo ? String(it.howTo).slice(0, 360) : null,
+    ruNote: it.ruNote ? String(it.ruNote).slice(0, 220) : null,
+    eta: it.eta ? String(it.eta).slice(0, 80) : null,
+    caution: it.caution ? String(it.caution).slice(0, 240) : null,
     url: it.url,
     forRoles: cleanRoles,
   };

@@ -1,9 +1,9 @@
 /* «Радар новинок»: свежие AI-инструменты + «как применить в твоей роли»,
    раздел «на подходе» и матрица «какая модель под задачу». */
-import { api } from '../api.js?v=v2';
-import { $, esc, skeletonList } from '../ui.js?v=v2';
-import { misc } from '../icons.js?v=v2';
-import { openLink, haptic } from '../tg.js?v=v2';
+import { api } from '../api.js?v=v3';
+import { $, esc, skeletonList } from '../ui.js?v=v3';
+import { misc } from '../icons.js?v=v3';
+import { openLink, haptic } from '../tg.js?v=v3';
 
 const CATEGORY = {
   llm: { label: 'Модели', emoji: '🧠' },
@@ -44,8 +44,8 @@ export async function renderRadar(view) {
 
   const items = data.items || [];
   const matrix = data.matrix || [];
-  const released = items.filter((i) => i.status !== 'upcoming');
-  const upcoming = items.filter((i) => i.status === 'upcoming');
+  const released = items.filter((i) => i.status === 'released');
+  const upcoming = items.filter((i) => i.status !== 'released'); // beta + upcoming
   const cats = [...new Set(items.map((i) => i.category))].filter((c) => CATEGORY[c]);
 
   function paint() {
@@ -85,17 +85,33 @@ export async function renderRadar(view) {
   paint();
 }
 
+const statusTag = (it) => {
+  if (it.status === 'upcoming') return '<span class="soon-tag">скоро</span>';
+  if (it.status === 'beta') return '<span class="beta-tag">превью</span>';
+  return it.hot ? '<span class="hot-flame">🔥 hot</span>' : '';
+};
+
+const vendorLine = (it) => {
+  const cat = `${CATEGORY[it.category]?.emoji || ''} ${CATEGORY[it.category]?.label || ''}`;
+  // released — показываем дату релиза; beta/upcoming — без даты (срок в строке «Ожидается»)
+  return it.status === 'released'
+    ? `${esc(it.vendor || '')} · ${esc(fmtDate(it.date))} · ${cat}`
+    : `${esc(it.vendor || '')} · ${cat}`;
+};
+
 const itemHTML = (it) => `
-  <div class="card radar-item ${it.status === 'upcoming' ? 'radar-item--soon' : ''}">
-    ${it.status === 'upcoming' ? '<span class="soon-tag">скоро</span>' : (it.hot ? '<span class="hot-flame">🔥 hot</span>' : '')}
+  <div class="card radar-item ${it.status !== 'released' ? 'radar-item--soon' : ''}">
+    ${statusTag(it)}
     <div class="radar-item__head">
       <div class="radar-item__logo">${esc((it.name || '?')[0].toUpperCase())}</div>
       <div style="min-width:0;padding-right:64px">
         <h3>${esc(it.name)}</h3>
-        <p class="vendor">${esc(it.vendor || '')} · ${esc(fmtDate(it.date))} · ${CATEGORY[it.category]?.emoji || ''} ${CATEGORY[it.category]?.label || ''}</p>
+        <p class="vendor">${vendorLine(it)}</p>
       </div>
     </div>
     <p class="radar-item__what">${esc(it.what || '')}</p>
+    ${it.caution ? `<div class="radar-item__caution">⚠️ ${esc(it.caution)}</div>` : ''}
+    ${(it.eta && it.status !== 'released') ? `<div class="radar-item__eta">🗓 <b>Ожидается:</b> ${esc(it.eta)}</div>` : ''}
     ${it.bestFor ? `<div class="radar-item__best">✦ <b>Лучше всего для:</b> ${esc(it.bestFor)}</div>` : ''}
     ${it.howTo ? `<div class="radar-item__how">🛠 <b>Как работать:</b> ${esc(it.howTo)}</div>` : ''}
     ${it.apply ? `<div class="radar-item__apply"><b>Для твоей роли:</b> ${esc(it.apply)}</div>` : ''}

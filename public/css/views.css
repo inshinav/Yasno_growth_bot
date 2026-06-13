@@ -521,18 +521,44 @@ html.dark .radar-item__apply b { color: #8FC0FF; }
   font-weight: 600;
 }
 .radar-item--soon { border-style: dashed; opacity: 0.94; }
-.soon-tag {
+.soon-tag, .beta-tag {
   position: absolute;
   top: 14px; right: 14px;
   font-size: 11px;
   font-weight: 800;
-  color: var(--azure-deep);
   padding: 4px 10px;
   border-radius: 999px;
+}
+.soon-tag {
+  color: var(--azure-deep);
   background: var(--azure-ghost);
   border: 1px dashed var(--azure);
 }
+.beta-tag {
+  color: #8A5BD6;
+  background: rgba(138, 91, 214, 0.12);
+  border: 1px solid rgba(138, 91, 214, 0.45);
+}
 html.dark .soon-tag { color: #8FC0FF; }
+html.dark .beta-tag { color: #C7A6FF; }
+.radar-item__eta {
+  margin-top: 9px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--azure-deep);
+}
+html.dark .radar-item__eta { color: #8FC0FF; }
+.radar-item__caution {
+  margin-top: 10px;
+  padding: 11px 14px;
+  border-radius: var(--r-md);
+  background: rgba(229, 72, 77, 0.10);
+  border: 1px solid rgba(229, 72, 77, 0.30);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--danger);
+}
+html.dark .radar-item__caution { color: #FF9499; }
 .radar-section { margin: 22px 2px 0; }
 .radar-section h3 { font-size: 17px; }
 .matrix-row { padding: 12px 0; }

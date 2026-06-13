@@ -167,9 +167,9 @@ apiRouter.get('/radar', wrap((req, res) => {
     apply: it.forRoles?.[role] || it.forRoles?.default || null,
     forRoles: undefined,
   }));
-  // Порядок: released → upcoming; внутри — сначала hot (лидеры), потом по дате (свежее выше)
+  // Порядок: released → (beta/upcoming); внутри released — сначала hot, потом по дате
   items.sort((a, b) => {
-    const su = (x) => (x.status === 'upcoming' ? 1 : 0);
+    const su = (x) => (x.status === 'released' ? 0 : 1);
     if (su(a) !== su(b)) return su(a) - su(b);
     if (!!b.hot !== !!a.hot) return (b.hot ? 1 : 0) - (a.hot ? 1 : 0);
     return String(b.date || '').localeCompare(String(a.date || ''));

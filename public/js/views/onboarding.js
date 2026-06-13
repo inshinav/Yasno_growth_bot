@@ -1,10 +1,10 @@
 /* Онбординг: 3 вопроса → уровень, выбор роли → результат с маскотом. */
-import { api } from '../api.js?v=v2';
-import { state, setProfile } from '../state.js?v=v2';
-import { $, el, esc, toast, confetti } from '../ui.js?v=v2';
-import { notifyBadges } from '../badges.js?v=v2';
-import { roleIcons, roleColor } from '../icons.js?v=v2';
-import { haptic } from '../tg.js?v=v2';
+import { api } from '../api.js?v=v3';
+import { state, setProfile } from '../state.js?v=v3';
+import { $, el, esc, toast, confetti } from '../ui.js?v=v3';
+import { notifyBadges } from '../badges.js?v=v3';
+import { roleIcons, roleColor } from '../icons.js?v=v3';
+import { haptic } from '../tg.js?v=v3';
 
 const QUESTIONS = [
   {
