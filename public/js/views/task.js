@@ -1,9 +1,9 @@
 /* «Принеси задачу» — ядро: рутина → AI-воркфлоу с промтом и оценкой экономии. */
-import { api } from '../api.js?v=v3';
-import { $, esc, mdLite, toast, sheet, copyText, confetti, fmtMinutes, skeletonList } from '../ui.js?v=v3';
-import { notifyBadges } from '../badges.js?v=v3';
-import { misc } from '../icons.js?v=v3';
-import { haptic, openLink } from '../tg.js?v=v3';
+import { api } from '../api.js?v=v4';
+import { $, esc, mdLite, toast, sheet, copyText, confetti, fmtMinutes, skeletonList } from '../ui.js?v=v4';
+import { notifyBadges } from '../badges.js?v=v4';
+import { misc } from '../icons.js?v=v4';
+import { haptic, openLink } from '../tg.js?v=v4';
 
 const EXAMPLES = [
   'Каждый понедельник собираю отчёт по метрикам в таблицу',

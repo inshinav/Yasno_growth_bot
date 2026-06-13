@@ -1,16 +1,16 @@
 /* Бут: splash → auth → онбординг или приложение. Роутер табов. */
-import { initTelegram, haptic } from './tg.js?v=v3';
-import { api } from './api.js?v=v3';
-import { state, setProfile } from './state.js?v=v3';
-import { $, el, toast } from './ui.js?v=v3';
-import { tabIcons, misc } from './icons.js?v=v3';
-import { startBackground } from './bg.js?v=v3';
-import { renderOnboarding } from './views/onboarding.js?v=v3';
-import { renderLearn } from './views/learn.js?v=v3';
-import { renderTask } from './views/task.js?v=v3';
-import { renderRadar } from './views/radar.js?v=v3';
-import { renderProgress } from './views/progress.js?v=v3';
-import { renderEffect } from './views/effect.js?v=v3';
+import { initTelegram, haptic } from './tg.js?v=v4';
+import { api } from './api.js?v=v4';
+import { state, setProfile } from './state.js?v=v4';
+import { $, el, toast } from './ui.js?v=v4';
+import { tabIcons, misc } from './icons.js?v=v4';
+import { startBackground } from './bg.js?v=v4';
+import { renderOnboarding } from './views/onboarding.js?v=v4';
+import { renderLearn } from './views/learn.js?v=v4';
+import { renderTask } from './views/task.js?v=v4';
+import { renderRadar } from './views/radar.js?v=v4';
+import { renderProgress } from './views/progress.js?v=v4';
+import { renderEffect } from './views/effect.js?v=v4';
 
 const TABS = [
   { id: 'learn', label: 'Учусь', render: renderLearn },

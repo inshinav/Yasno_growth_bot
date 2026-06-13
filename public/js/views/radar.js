@@ -1,9 +1,9 @@
 /* «Радар новинок»: свежие AI-инструменты + «как применить в твоей роли»,
    раздел «на подходе» и матрица «какая модель под задачу». */
-import { api } from '../api.js?v=v3';
-import { $, esc, skeletonList } from '../ui.js?v=v3';
-import { misc } from '../icons.js?v=v3';
-import { openLink, haptic } from '../tg.js?v=v3';
+import { api } from '../api.js?v=v4';
+import { $, esc, skeletonList } from '../ui.js?v=v4';
+import { misc } from '../icons.js?v=v4';
+import { openLink, haptic } from '../tg.js?v=v4';
 
 const CATEGORY = {
   llm: { label: 'Модели', emoji: '🧠' },
@@ -53,6 +53,7 @@ export async function renderRadar(view) {
     const up = activeFilter === 'all' ? upcoming : upcoming.filter((i) => i.category === activeFilter);
     $('#radar-body', view).innerHTML = `
       ${freshnessLine(data.updated)}
+      <div class="radar-note">⚠️ Большинство облачных AI недоступны из РФ напрямую и не годятся для данных пациентов — детали в строке «🌐» каждой карточки. Для приватного — self-host и российские сервисы.</div>
       <div class="radar-filters">
         <button class="chip ${activeFilter === 'all' ? 'chip--active' : ''}" data-f="all">Всё</button>
         ${cats.map((c) => `
